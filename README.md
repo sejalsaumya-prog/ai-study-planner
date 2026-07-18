@@ -1,4 +1,5 @@
-# StudyAI — AI-Powered Study Planner
+## Live Demo
+https://ai-study-planner-tan.vercel.app# StudyAI — AI-Powered Study Planner
 
 A full-stack web application that uses AI to generate personalized study schedules based on your subjects, exam dates, and available study hours.
 
