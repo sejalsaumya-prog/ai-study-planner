@@ -4,7 +4,7 @@ import {
   RadialBarChart, RadialBar, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, Tooltip, Cell
 } from 'recharts';
-import { Trophy, Target, Clock, Zap, TrendingUp, Calendar } from 'lucide-react';
+import { Target, Zap, TrendingUp, Calendar } from 'lucide-react';
 
 export default function Progress() {
   const [stats, setStats] = useState(null);
