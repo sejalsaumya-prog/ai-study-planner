@@ -14,13 +14,13 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://ai-study-planner-tan.vercel.app'
+    'https://ai-study-planner-tan.vercel.app',
+    'https://ai-study-planner-git-main-sejalsaumya.vercel.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/subjects', subjectRoutes);
