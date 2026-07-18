@@ -1,10 +1,9 @@
 ## Live Demo
-https://ai-study-planner-tan.vercel.app# StudyAI — AI-Powered Study Planner
+https://ai-study-planner-tan.vercel.app 
+
+# StudyAI — AI-Powered Study Planner
 
 A full-stack web application that uses AI to generate personalized study schedules based on your subjects, exam dates, and available study hours.
-
-## Live Demo
-> Deploy link goes here after deployment
 
 ## Features
 - 🤖 **AI Schedule Generation** — Groq (Llama3) creates optimized 7-day study plans
