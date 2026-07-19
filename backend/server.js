@@ -42,6 +42,16 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch(err => console.error('MongoDB connection error:', err));
 
 const PORT = process.env.PORT || 5000;
+// Global error handler - catches ALL unhandled errors
+app.use((err, req, res, next) => {
+  console.error('GLOBAL ERROR:', err.message, err.stack);
+  res.status(500).json({ message: err.message });
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection:', reason);
+});
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
