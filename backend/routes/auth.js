@@ -20,31 +20,56 @@ router.post('/register', async (req, res) => {
   try {
     const { name, email, password, studyHoursPerDay } = req.body;
 
+    console.log('Register attempt:', email);
+
     // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // Create user
-    const user = new User({ name, email, password, studyHoursPerDay });
-    await user.save();
+    // Hash password manually
+    const bcrypt = require('bcryptjs');
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create user with pre-hashed password
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      studyHoursPerDay
+    });
+
+    // Skip the pre-save hook by saving directly
+    await User.collection.insertOne({
+      name,
+      email,
+      password: hashedPassword,
+      studyHoursPerDay: studyHoursPerDay || 4,
+      createdAt: new Date()
+    });
 
     // Generate token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '7d'
-    });
+    const jwt = require('jsonwebtoken');
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    console.log('Register success:', email);
 
     res.status(201).json({
       token,
       user: {
         id: user._id,
-        name: user.name,
-        email: user.email,
-        studyHoursPerDay: user.studyHoursPerDay
+        name,
+        email,
+        studyHoursPerDay: studyHoursPerDay || 4
       }
     });
   } catch (error) {
+    console.error('Register error full:', error.message, error.stack);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
