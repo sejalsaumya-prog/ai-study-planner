@@ -96,8 +96,7 @@ export default function Subjects() {
       {/* Add/Edit Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-md">
-            <div className="flex items-center justify-between mb-5">
+<div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-md max-h-screen overflow-y-auto">            <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg font-semibold text-white">
                 {editId ? 'Edit Subject' : 'Add New Subject'}
               </h2>
