@@ -3,11 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth');
-const subjectRoutes = require('./routes/subjects');
-const scheduleRoutes = require('./routes/schedule');
-const progressRoutes = require('./routes/progress');
-
 const app = express();
 
 // Middleware
@@ -21,6 +16,13 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const authRoutes = require('./routes/auth');
+const subjectRoutes = require('./routes/subjects');
+const scheduleRoutes = require('./routes/schedule');
+const progressRoutes = require('./routes/progress');
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/subjects', subjectRoutes);
