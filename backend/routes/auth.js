@@ -4,6 +4,16 @@ const User = require('../models/User');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
+// Test route - remove after debugging
+router.get('/test', async (req, res) => {
+  try {
+    const User = require('../models/User');
+    const count = await User.countDocuments();
+    res.json({ message: 'DB working', userCount: count });
+  } catch (error) {
+    res.json({ message: 'DB failed', error: error.message });
+  }
+});
 
 // Register
 router.post('/register', async (req, res) => {
