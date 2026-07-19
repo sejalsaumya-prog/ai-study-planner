@@ -10,8 +10,8 @@ export const useAuth = () => {
 };
 
 // Set axios defaults
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+axios.defaults.baseURL = apiUrl.startsWith('http') ? apiUrl : `https://${apiUrl}`;
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
